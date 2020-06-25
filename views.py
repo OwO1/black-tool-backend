@@ -7,17 +7,18 @@ from app import app, db
 
 @app.route('/home/', methods=['GET'])
 def home():
-    print('1111111')
-    data = [
-        {
-            'about': 'docker',
-            'command': 'docker init 333',
-            'introduce': '初始化'
-        },
-    ]
+    commands = Commands.query.all()
+    command_list = []
+    for c in commands:
+        command_list.append({
+            'about': c.about,
+            'command': c.command,
+            'introduce': c.introduce,
+        })
+
     res = {
         "status": 200,
-        "data": data,
+        "data": command_list,
         "msg": "ok",
     }
     return jsonify(res)
