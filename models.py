@@ -1,6 +1,19 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
+import datetime
+import enum
+
 from app import db
+from enums import TodoStatusEnum, TodoTypeEnum
+
+
+# class BaseModel(db.Model):
+#     __abstract__ = True
+
+#     id = db.Column(db.BigInteger, primary_key=True, autoincrement=True, comment="自增id")
+#     create_time = db.Column(db.DateTime, index=True, nullable=False, server_default=db.text('NOW()'), comment="创建时间")
+#     update_time = db.Column(db.DateTime, index=True, nullable=False, server_default=db.text('NOW()'), onupdate=datetime.datetime.now, comment="更新时间")
+#     delete_time = db.Column(db.DateTime, index=True, nullable=True, comment="删除时间")
+
 
 class Commands(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -9,60 +22,9 @@ class Commands(db.Model):
     introduce = db.Column(db.String(200))
 
 
-# class User(db.Model):
-#     #  账号表
-#     id = db.Column(db.Integer, primary_key=True)
-#     name = db.Column(db.String(20))
-#     username = db.Column(db.String(20))
-#     # 存储加密后的密码
-#     password = db.Column(db.String(100))
-#     email = db.Column(db.String(100))
-#     create_time = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-# class UserInfo(db.Model):
-#     #  用户记录表
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer)
-#     # 积分
-#     point = db.Column(db.Integer)
-#     # 能量
-#     energy = db.Column(db.Integer)
-#     # 关卡
-#     level = db.Column(db.Integer)
-#     create_time = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-# class History(db.Model):
-#     # 历史的游戏数据
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer)
-#     point = db.Column(db.Integer)
-#     create_time = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-# class Friendship(db.Model):
-#     #  好友表
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer)
-#     friend_id = db.Column(db.Integer)
-#     create_time = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-# class RankingList(db.Model):
-#     #  排行榜
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer)
-#     level = db.Column(db.Integer)
-#     point = db.Column(db.Integer)
-#     create_time = db.Column(db.DateTime, default=datetime.utcnow)
-
-
-# class UserSecurityCode(db.Model):
-#     #  存储验证码
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer)
-#     security_code = db.Column(db.String(100))
-#     create_time = db.Column(db.DateTime, default=datetime.utcnow)
-#     # 1为使用 0为未使用
-#     status = db.Column(db.Integer)
+class Todo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    todo = db.Column(db.String(200), nullable=False, default='', server_default='', comment='代办事项')
+    note = db.Column(db.String(200), nullable=True, comment='代办事项备注')
+    status = db.Column(db.Integer, nullable=False, default=str(TodoStatusEnum.UNFINISHED.value), server_default=str(TodoStatusEnum.UNFINISHED.value), comment='代办事项完成状态')
+    todo_type = db.Column(db.Integer, nullable=False, default=str(TodoTypeEnum.TODAY.value), server_default=str(TodoTypeEnum.TODAY.value), comment='代办事项类型')

@@ -7,7 +7,6 @@ app = Flask('tools')
 app.config.from_pyfile('settings.py')
 
 db = SQLAlchemy(app)
-# cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 CORS(app, resources=r'/*')
 
 import views, commands
