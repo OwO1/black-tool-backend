@@ -1,6 +1,8 @@
 from sqlalchemy.orm import Query
 
-from app import db
+from ..db import db
+# from models import Commands
+# db = app.db
 
 
 class BaseService(object):
@@ -12,7 +14,6 @@ class BaseService(object):
     def session(self):
         session = db.session
         return session
-
 
     def add(self, instance):
         session = self.session

@@ -2,7 +2,7 @@
 import datetime
 import enum
 
-from app import db
+from ..db import db
 from enums import TodoStatusEnum, TodoTypeEnum
 
 

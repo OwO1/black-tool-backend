@@ -1,4 +1,4 @@
-from tool.base_handler import BaseHandler
+from apps.handler.base_handler import BaseHandler
 
 
 class ToDoListHandler(BaseHandler):
