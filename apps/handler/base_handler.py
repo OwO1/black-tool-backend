@@ -11,7 +11,7 @@ HTTP_POST = 'POST'
 
 class BaseHandler(MethodView):
     def __init__(self):
-        pass
+        self.req_form = self.get_request_form()
 
     @staticmethod
     def success(msg=SUCCESS_MSG, data=None):
@@ -44,3 +44,15 @@ class BaseHandler(MethodView):
         if data:
             result['data'] = data
         return jsonify(result)
+
+    @staticmethod
+    def get_request_form():
+        if request.method == HTTP_GET:
+            return request.args.to_dict(flat=True)
+        if request.method == HTTP_POST:
+            if not request.data:
+                return {}
+            if not request.is_json:
+                pass
+            return request.get_json()
+        return {}

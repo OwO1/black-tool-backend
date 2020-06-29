@@ -1,5 +1,5 @@
 from apps.services.base_service import BaseService
-from ..db.models import Commands
+from apps.db.models import Commands
 
 
 class CommandsService:
@@ -17,9 +17,3 @@ class CommandsService:
                 'introduce': c.introduce,
             })
         return command_list
-        # res = {
-        #     "status": 200,
-        #     "data": command_list,
-        #     "msg": "ok",
-        # }
-        # return jsonify(res)

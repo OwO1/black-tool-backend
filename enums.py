@@ -47,3 +47,7 @@ class TodoTypeEnum(BaseEnum):
     TODAY = 0
     # 日后代办
     AFTER = 1
+
+class DeletedStatusEnum(BaseEnum):
+    DELETED = 0
+    EXIST = 1

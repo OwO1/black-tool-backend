@@ -3,7 +3,7 @@ import datetime
 import enum
 
 from ..db import db
-from enums import TodoStatusEnum, TodoTypeEnum
+from enums import TodoStatusEnum, TodoTypeEnum, DeletedStatusEnum
 
 
 # class BaseModel(db.Model):
@@ -20,6 +20,7 @@ class Commands(db.Model):
     about = db.Column(db.String(200))
     command = db.Column(db.String(200))
     introduce = db.Column(db.String(200))
+    deleted = db.Column(db.Integer, nullable=False, default=str(DeletedStatusEnum.EXIST.value), server_default=str(DeletedStatusEnum.EXIST.value), comment='是否被删除')
 
 
 class Todo(db.Model):
@@ -28,3 +29,4 @@ class Todo(db.Model):
     note = db.Column(db.String(200), nullable=True, comment='代办事项备注')
     status = db.Column(db.Integer, nullable=False, default=str(TodoStatusEnum.UNFINISHED.value), server_default=str(TodoStatusEnum.UNFINISHED.value), comment='代办事项完成状态')
     todo_type = db.Column(db.Integer, nullable=False, default=str(TodoTypeEnum.TODAY.value), server_default=str(TodoTypeEnum.TODAY.value), comment='代办事项类型')
+    deleted = db.Column(db.Integer, nullable=False, default=str(DeletedStatusEnum.EXIST.value), server_default=str(DeletedStatusEnum.EXIST.value), comment='是否被删除')

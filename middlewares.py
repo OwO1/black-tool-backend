@@ -23,8 +23,9 @@ def parse_current_request_data():
 
 
 def set_response_headers(response):
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Cache-Control'] = 'no-store,no-cache'
+    response.headers["Access-Control-Allow-Origin"] = '*'
+    response.headers["Access-Control-Allow-Methods"] = 'POST'
+    response.headers["Access-Control-Allow-Headers"] = "x-requested-with,content-type"
     return response
 
 
