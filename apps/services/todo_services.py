@@ -33,9 +33,10 @@ class TodoService(BaseService):
         todo.todo_type = todo_type
         self.update(todo)
 
-    def get_list(self,todo_type):
+    def get_list(self, todo_type):
         query_dict = {
             "todo_type": todo_type,
+            "deleted": DeletedStatusEnum.EXIST.value,
         }
         todos = self.session.query(self.model_cls).filter_by(**query_dict).all()
         todo_list = []
@@ -45,14 +46,14 @@ class TodoService(BaseService):
                 "todo": t.todo,
                 "note": t.note,
                 "status": t.status,
-                "todoType": t.todo_type,
+                ".da": t.todo_type,
                 "deleted": t.deleted,
             })
         return todo_list
 
-    def delete_todo(self, id, todo_type):
+    def delete_todo(self, id):
         todo = self._get(id)
-        todo.deleted = todo_type
+        todo.deleted = DeletedStatusEnum.DELETED.value
         self.update(todo)
 
     def _get(self, id):

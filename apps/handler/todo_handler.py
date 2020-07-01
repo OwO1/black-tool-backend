@@ -27,5 +27,6 @@ class ToDoUpdateHandler(BaseHandler):
 
 class ToDoDeleteHandler(BaseHandler):
     def post(self):
-        print('self.req_form:', self.req_form)
+        data_id = self.req_form['id']
+        todo_service.delete_todo(data_id)
         return self.success(data={})
