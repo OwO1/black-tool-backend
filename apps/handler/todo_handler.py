@@ -14,7 +14,7 @@ class ToDoListHandler(BaseHandler):
 class ToDoCreateHandler(BaseHandler):
     def post(self):
         todo = self.req_form['todo']
-        todo_type = self.req_form['todoType']
+        todo_type = self.req_form['type']
         note = self.req_form['todoNote']
         todo_service.create_todo(todo, note, todo_type)
         return self.success(data={})
@@ -22,6 +22,12 @@ class ToDoCreateHandler(BaseHandler):
 
 class ToDoUpdateHandler(BaseHandler):
     def post(self):
+        id = self.req_form['id']
+        todo = self.req_form['todo']
+        todo_type = self.req_form['type']
+        note = self.req_form['note']
+        status = self.req_form['status']
+        todo_service.update_todo(id, todo, note, status, todo_type)
         return self.success(data={})
 
 

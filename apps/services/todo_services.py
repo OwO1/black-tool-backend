@@ -26,12 +26,12 @@ class TodoService(BaseService):
         self.add(todo)
 
     def update_todo(self, id, todo, note, status, todo_type):
-        todo = self._get(id)
-        todo.todo = todo
-        todo.note = note
-        todo.status = status
-        todo.todo_type = todo_type
-        self.update(todo)
+        todo_item = self._get(id)
+        todo_item.todo = todo
+        todo_item.note = note
+        todo_item.status = status
+        todo_item.todo_type = todo_type
+        self.update(todo_item)
 
     def get_list(self, todo_type):
         query_dict = {
@@ -46,7 +46,7 @@ class TodoService(BaseService):
                 "todo": t.todo,
                 "note": t.note,
                 "status": t.status,
-                ".da": t.todo_type,
+                "type": t.todo_type,
                 "deleted": t.deleted,
             })
         return todo_list
