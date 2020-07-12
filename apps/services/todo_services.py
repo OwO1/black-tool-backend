@@ -37,6 +37,7 @@ class TodoService(BaseService):
         query_dict = {
             "todo_type": todo_type,
             "deleted": DeletedStatusEnum.EXIST.value,
+            "status": TodoStatusEnum.UNFINISHED.value,
         }
         todos = self.session.query(self.model_cls).filter_by(**query_dict).all()
         todo_list = []

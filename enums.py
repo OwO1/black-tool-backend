@@ -51,3 +51,8 @@ class TodoTypeEnum(BaseEnum):
 class DeletedStatusEnum(BaseEnum):
     DELETED = 0
     EXIST = 1
+
+class FieldTypeEnum(BaseEnum):
+    INT = 1
+    STRING = 1
+    DATE = 1
