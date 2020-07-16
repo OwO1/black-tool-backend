@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Created by zhangminpeng on 2019/11/27
 import binascii
 
 
