@@ -1,3 +1,4 @@
+import json
 from apps.transfer_utils.base_model import BaseModel
 from enums import FieldTypeEnum
 
@@ -15,7 +16,6 @@ class Parser():
             bm = BaseModel(key, value, field_type, meta_type)
             parser_list.append(bm)
         res = self._combine(parser_list)
-        print(res)
         return res
 
     def _combine(self, parser_list):
@@ -23,7 +23,8 @@ class Parser():
         for n in parser_list:
             tmp = n.to_camel_dict()
             res.update(tmp)
-        return res
+        res_str = json.dumps(res, indent=2)
+        return res_str
 
     def _prepare(self, words):
         return self._remove_space(words)
@@ -43,8 +44,8 @@ class Parser():
         根据 "=" 将关键信息提取出来
         """
         split_word = line.split("=", 1)
-        key = split_word[0]
-        value = split_word[1]
+        key = split_word[0].strip()
+        value = split_word[1].strip()
         field_type = self._get_line_type(line)
         meta_type = ''
         return key, value, field_type, meta_type
